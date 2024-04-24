@@ -34,7 +34,7 @@ abstract public class BaseController {
 
         return new ApiResponse<>(
                 ErrorCode.BAD_REQUEST.getCode(),
-                "확인할 수 없는 형태의 데이터입니다.");
+                "유효하지 않는 값입니다.");
     }
 
     public <T> ApiResponse<T> makeApiResponse(List<T> results) {

@@ -30,10 +30,6 @@ public class InputRestriction {
     }
 
     public void setScore(int minScore, int maxScore) {
-        if(minScore == Integer.MIN_VALUE || maxScore == Integer.MAX_VALUE) {
-            throw new CustomException(ErrorCode.BAD_REQUEST, "유효하지 않은 값입니다.");
-        }
-
         this.minScore = minScore;
         this.maxScore = maxScore;
     }

@@ -34,6 +34,10 @@ public class UserController extends BaseController {
 
     @PostMapping("/settings")
     public ApiResponse<InputRestriction> setScore(@RequestBody InputRestriction inputRestriction) {
+        if(!userService.findAllOrderByScore().isEmpty()) {
+            throw new CustomException(ErrorCode.BAD_REQUEST, "사용자 정보가 입력되어 있어 점수 범위 변경이 불가능합니다.");
+        }
+
         instance.setScore(inputRestriction.getMinScore(), inputRestriction.getMaxScore());
         return makeApiResponse(instance);
     }
