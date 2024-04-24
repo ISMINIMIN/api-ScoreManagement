@@ -33,10 +33,6 @@ public class ApiResponse<T> {
         this.results = List.of(result);
     }
 
-    public ApiResponse(int code, String message) {
-        this.status = new Status(code, message);
-    }
-
     public ApiResponse(int code, String message, Object inputRestriction) {
         this.status = new Status(code, message);
         this.inputRestriction = inputRestriction;
