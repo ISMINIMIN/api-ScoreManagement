@@ -7,7 +7,8 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     OK(200, HttpStatus.OK, "OK"),
-    BAD_REQUEST(400, HttpStatus.BAD_REQUEST, "잘못된 요청입니다.");
+    BAD_REQUEST(400, HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
+    FORBIDDEN(403, HttpStatus.FORBIDDEN, "금지된 접근입니다.");
 
     private final int code;
     private final HttpStatus httpStatus;
