@@ -13,10 +13,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public User addUser(String name, int score) {
-        User user = new User(name, score);
+    public void addUser(User user) {
         userRepository.add(user);
-        return user;
     }
 
     public List<User> findAllOrderByScore() {
