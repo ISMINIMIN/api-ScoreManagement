@@ -15,18 +15,27 @@ import java.util.List;
 @AllArgsConstructor
 public class UserController extends BaseController {
 
+    private static final InputRestriction instance = InputRestriction.getInstance();
     private final UserService userService;
 
     @PostMapping("/user")
     public ApiResponse<User> add(@RequestBody User user) {
         int score = user.getScore();
+        int minScore = instance.getMinScore();
+        int maxScore = instance.getMaxScore();
 
-        if(score > 100 || score < 0) {
-            throw new CustomException(ErrorCode.BAD_REQUEST, "점수는 0점 이상 100점 이하로 입력하세요.", new InputRestriction(0, 100));
+        if(score > maxScore || score < minScore) {
+            throw new CustomException(ErrorCode.BAD_REQUEST, "점수는 " + minScore + "점 이상 " + maxScore + "점 이하로 입력하세요.", instance);
         }
 
         userService.addUser(user);
         return makeApiResponse(user);
+    }
+
+    @PostMapping("/settings")
+    public ApiResponse<InputRestriction> setScore(@RequestBody InputRestriction inputRestriction) {
+        instance.setScore(inputRestriction.getMinScore(), inputRestriction.getMaxScore());
+        return makeApiResponse(instance);
     }
 
     @GetMapping("/users")
